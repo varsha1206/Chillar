@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+python-multipart
+pydantic
+sqlalchemy
+databases[sqlite]
+aiofiles
+requests
+pytesseract
+Pillow
+google-genai
