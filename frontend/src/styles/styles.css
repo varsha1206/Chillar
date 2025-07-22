@@ -1,0 +1,163 @@
+/* Pastel minimalist theme */
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: 'Gowun Batang', serif;
+  background-color: #2C3930;
+  color: #DCD7C9;
+}
+
+.home-container {
+  position: relative;
+  width: 100vw;              /* Full viewport width */
+  min-height: 100vh;         /* Full height */
+  padding: 1rem;             /* Minimal consistent padding */
+  margin: 0;                 /* No margin to prevent offset */
+  background: #A27B5C;
+  border-radius: 0;          /* Remove radius if you want edge-to-edge look */
+  box-shadow: none;          /* Optional: remove if unnecessary */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-x: hidden;        /* Prevent horizontal scroll */
+}
+.logo-circle {
+  width: 7rem;           /* circle size */
+  height: 7rem;
+  border-radius: 50%;    /* make it round */
+  object-fit: cover;     /* scale image nicely */
+  position: absolute;    /* position it on the right */
+  top: 2rem;             /* adjust vertical position */
+  right: 2rem;           /* adjust horizontal position */
+  box-shadow: 0 0 6px rgba(0,0,0,0.3);
+  background-color: #A27B5C; /* fallback bg if image fails */
+}
+.title {
+  width: 100%;
+  padding: 0.2rem 0.2rem;
+  background: #2C3930;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+h1 {
+  color: #DCD7C9;
+  margin-bottom: 40px;
+  font-size: 4rem;
+  text-align: center;
+}
+
+h2 {
+  color: #DCD7C9;
+  margin-bottom: 10px;
+  font-size: 2rem;
+  text-align: left;
+}
+
+.chillar {
+  color: #A27B5C;
+  font-weight: 1500;
+  font-size: 5rem;
+  text-align: left;
+}
+
+.menu-grid {
+  display: grid;
+  gap: 1.5rem;
+  margin: 2rem 0;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Changed 2fr to 1fr */
+}
+
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.button {
+  background-color: #677D6A;
+  border: none;
+  border-radius: 10px;
+  padding: 20px 40px;
+  font-size: 1.2rem;
+  color: #DCD7C9;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 8px #c7d7e0aa;
+  width: 180px;
+}
+
+.button:hover {
+  background-color: #1A3636;
+  box-shadow: 0 6px 12px #9db4c0cc;
+}
+
+/* For file input */
+.upload-image {
+  width: 20rem;
+  height: 10rem;
+  padding: 0.2rem 0.2rem;
+  background: #A27B5C;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto;
+  border-radius: 0.5rem;
+}
+.file-input {
+  margin-top: 20px;
+  align-content: center;
+}
+
+.upload-btn {
+  margin-top: 20px;
+  margin: 0 auto;
+  padding: 12px 30px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: none;
+  background-color: #705070;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: relative;
+}
+
+.upload-btn:hover {
+  background-color: #593858;
+}
+
+.success-upload {
+  width: 20rem;
+  margin: 0 auto;
+  margin-top: 1.25rem;           /* 20px ≈ 1.25rem */
+  text-align: center;
+  background-color: #d4edda;
+  color: #155724;
+  padding: 0.9375rem;            /* 15px ≈ 0.9375rem */
+  border-radius: 0.3125rem;      /* 5px ≈ 0.3125rem */
+  border: 0.0625rem solid #c3e6cb; /* 1px ≈ 0.0625rem */
+  font-family: monospace;
+  white-space: pre-wrap;
+  word-break: break-word;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

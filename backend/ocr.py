@@ -7,8 +7,8 @@ from google import genai
 from google.genai import types
 import datetime
 from typing import List
-from backend import db_utilities
-from .models import CategorizedExpenses, ExpenseItem
+import db_utilities
+from models import CategorizedExpenses, ExpenseItem
 import io
 
 def extract_text_from_receipt(image_bytes):
