@@ -2,6 +2,7 @@
 
 tableList = {
     "EXPENSES": ["CATEGORY","PRICE","DATE"],
+    "EATOUT": ["RESTAURANT","ORDER_NAME","PRICE","DATE"]
     }
 
 import sqlite3

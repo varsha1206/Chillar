@@ -10,6 +10,7 @@ from typing import List
 import db_utilities
 from models import CategorizedExpenses, ExpenseItem
 import io
+import pandas as pd 
 
 def extract_text_from_receipt(image_bytes):
     image = Image.open(io.BytesIO(image_bytes))
