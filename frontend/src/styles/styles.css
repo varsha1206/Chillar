@@ -75,6 +75,9 @@ h2 {
 }
 
 .menu-grid {
+  background-color: #2C3930;
+  padding: 1rem 1rem 1rem 1rem;
+  border-radius: 12px;
   display: grid;
   gap: 1.5rem;
   margin: 2rem 0;
@@ -102,7 +105,7 @@ h2 {
 }
 
 .button:hover {
-  background-color: #1A3636;
+  background-color: #705070;
   box-shadow: 0 6px 12px #9db4c0cc;
 }
 
@@ -160,4 +163,263 @@ h2 {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+/*Eatout*/
+
+.eatout-container {
+  max-width: 100%;
+  padding: 1rem;
+  background-color: #2C3930;
+  color: #DCD7C9;
+  font-family: 'Gowun Batang', serif;
+}
+
+h1 {
+  font-size: 3rem;
+  color: #DCD7C9;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.restaurant-box {
+  background: #A27B5C;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.restaurant-box h2 {
+  font-size: 1.5rem;
+  color: #2C3930;
+  margin-bottom: 1rem;
+}
+
+.meal-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.meal-buttons button {
+  background-color: #3F4F44;
+  color: #DCD7C9;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.meal-buttons button:hover {
+  background-color: #2C3930;
+}
+
+.custom-entry {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.custom-entry input {
+  padding: 0.4rem;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 0.4rem;
+  width: 9rem;
+}
+
+.custom-entry button {
+  background-color: #705070;
+  color: white;
+  border: none;
+  border-radius: 0.4rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.custom-entry button:hover {
+  background-color: #593858;
+}
+
+.footer {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #DCD7C9;
+  text-align: center;
+}
+
+.submit-button {
+  margin-top: 1rem;
+  padding: 0.7rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: #3F4F44;
+  color: #DCD7C9;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #1A3636;
+}
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(44, 57, 48, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+}
+
+.modal-content {
+  background-color: #DCD7C9;
+  color: #2C3930;
+  padding: 2rem;
+  border-radius: 1rem;
+  max-width: 90%;
+  width: 25rem;
+  font-family: monospace;
+}
+
+.modal-content h3, h4 {
+  margin-bottom: 0.5rem;
+}
+
+.confirm-section {
+  margin-bottom: 1rem;
+}
+
+.modal-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.modal-actions .confirm,
+.modal-actions .cancel {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.modal-actions .confirm {
+  background-color: #3F4F44;
+  color: #DCD7C9;
+}
+
+.modal-actions .cancel {
+  background-color: #A27B5C;
+  color: white;
+}
+
+.success-alert {
+  margin-top: 1rem;
+  background-color: #d4edda;  /* pale green */
+  color: #155724;             /* dark green */
+  border: 1px solid #c3e6cb;
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  font-family: monospace;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.view-summary-container {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.month-picker {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.month-picker label {
+  font-weight: bold;
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+  color: #264653;
+}
+
+.month-picker input[type="month"] {
+  padding: 0.4rem 0.6rem;
+  font-size: 1.1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.month-picker input[type="month"]:focus {
+  outline: none;
+  border-color: #2a9d8f;
+}
+
+.total-expense {
+  text-align: center;
+  color: #264653;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  font-weight: 700;
+}
+
+.container {
+  background: #f9f9f9;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 3rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #2a9d8f;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+th,
+td {
+  padding: 0.8rem;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+  color: #333;
+  font-weight: 500;
+}
+
+th {
+  background-color: #e0f2f1;
+}
+
+.error {
+  color: #e63946;
+  font-weight: bold;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.piechart-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
 }

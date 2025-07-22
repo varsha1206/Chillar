@@ -17,7 +17,7 @@ export default function HomePage() {
         <button className="button" onClick={() => navigate("/grocery-upload")}>
           Grocery
         </button>
-        <button className="button" onClick={() => alert("Coming soon!")}>
+        <button className="button" onClick={() => navigate("/eatout")}>
           Eat Out
         </button>
         <button className="button" onClick={() => alert("Coming soon!")}>
@@ -26,7 +26,7 @@ export default function HomePage() {
         <button className="button" onClick={() => alert("Coming soon!")}>
           Travel
         </button>
-        <button className="button" onClick={() => alert("Coming soon!")}>
+        <button className="button" onClick={() => navigate("/viewsummary")}>
           View Summary
         </button>
       </div>
