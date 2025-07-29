@@ -24,6 +24,7 @@ def extract_expenses_from_text(text: str) -> List[ExpenseItem]:
         category = match.group(1).strip()
         amount = float(match.group(2))
         items.append(ExpenseItem(category=category, amount=amount))
+    print("The grocery list after Gemini: ", items) #print statement added just to check output of Gemini
     return items
 
 def extract_expenses(airesponse):
@@ -32,7 +33,7 @@ def extract_expenses(airesponse):
 
 def OCR_text(image_path):
     bill = extract_text_from_receipt(image_path)
-
+    print(bill)
     # The client gets the API key from the environment variable `GEMINI_API_KEY`.
     client = genai.Client()
     content = f"""
