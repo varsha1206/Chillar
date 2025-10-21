@@ -44,13 +44,12 @@ It’s also my first real dabble in **frontend development**, so expect some pas
 1. **Backend**
 ```bash
 cd backend
-python -m venv .venv
-.venv\Scripts\activate
 pip install -r requirements.txt
 python main.py
-
+```
 2. **Frontend** 
 ```bash
 cd frontend
 npm install
 npm start
+```
