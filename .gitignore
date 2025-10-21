@@ -11,3 +11,4 @@ env/
 # Other common ignores
 .DS_Store
 *.log
+*.db
