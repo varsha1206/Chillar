@@ -6,6 +6,7 @@ import sqlite3
 tableList = {
     "EATOUT": ["RESTAURANT", "ORDER_NAME", "PRICE", "DATE"],
     "SUBSCRIPTIONS": ["ID INTEGER PRIMARY KEY AUTOINCREMENT", "NAME", "PRICE"],
+    "TRAVEL": ["MODE_NAME", "FROM_CITY", "DESTINATION", "DEPATURE_DATE", "ARRIVAL_DATE", "PRICE"]
 }
 
 base_dir = os.path.dirname(os.path.abspath(__file__))

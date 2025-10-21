@@ -51,6 +51,7 @@ export default function ViewSummary() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [subscriptionsData, setSubscriptionsData] = useState([]);
+  const [travelData, setTravelData] = useState([]);
 
   useEffect(() => {
     if (!month) return;
@@ -59,21 +60,24 @@ export default function ViewSummary() {
       setLoading(true);
       setError(null);
       try {
-        const [totalRes, eatoutRes, subsRes] = await Promise.all([
+        const [totalRes, eatoutRes, subsRes, travelRes] = await Promise.all([
           fetch(`http://localhost:8000/total_expense?month=${month}`),
           fetch(`http://localhost:8000/eatout_expenses?month=${month}`),
-          fetch(`http://localhost:8000/subscriptions_expenses`)
+          fetch(`http://localhost:8000/subscriptions_expenses`),
+          fetch(`http://localhost:8000/travel_expenses?month=${month}`)
         ]);
-        if (!totalRes.ok || !subsRes.ok || !eatoutRes.ok)
+        if (!totalRes.ok || !subsRes.ok || !eatoutRes.ok || !travelRes.ok)
           throw new Error("Failed to load data");
 
         const totalJson = await totalRes.json();
         const eatoutJson = await eatoutRes.json();
         const subsJson = await subsRes.json();
+        const travelJson = await travelRes.json();
 
         setSubscriptionsData(subsJson.data || []);
         setTotalExpense(totalJson.total || 0);
         setEatOutData(eatoutJson.data || []);
+        setTravelData(travelJson.data || []);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -163,6 +167,39 @@ export default function ViewSummary() {
 
             <div className="piechart-wrapper">
               <PieChartComponent data={subscriptionsData} labelKey="service" />
+            </div>
+          </>
+        )}
+      </div>
+
+      <div className="container travel-container">
+        <h2>Travel Expenses</h2>
+        {loading && <p>Loading...</p>}
+        {error && <p className="error">{error}</p>}
+        {!loading && !error && travelData.length === 0 && (
+          <p>No travel expenses recorded for {month}.</p>
+        )}
+        {travelData.length > 0 && (
+          <>
+            <table>
+              <thead>
+                <tr>
+                  <th>Mode</th>
+                  <th>Amount (€)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {travelData.map(({ mode, price }) => (
+                  <tr key={mode}>
+                    <td>{mode}</td>
+                    <td>{price.toFixed(2)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            <div className="piechart-wrapper">
+              <PieChartComponent data={travelData} labelKey="mode" />
             </div>
           </>
         )}

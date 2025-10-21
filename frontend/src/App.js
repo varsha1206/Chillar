@@ -5,6 +5,7 @@ import HomePage from "./components/HomePage";
 import EatOut from "./components/EatOut";
 import ViewSummary from "./components/ViewSummary";
 import Subscriptions from "./components/Subscriptions";
+import Travel from "./components/Travel";
 
 import "./styles/styles.css";
 
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/eatout" element={<EatOut />} />
         <Route path="/subscriptions" element={<Subscriptions />} />
+        <Route path="/travel" element={<Travel />} />
         <Route path="/viewsummary" element={<ViewSummary />} />
       </Routes>
     </Router>

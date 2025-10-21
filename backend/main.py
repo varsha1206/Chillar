@@ -64,11 +64,12 @@ def total_expense(month: str = Query(..., description="Month in YYYY-MM format")
         query = f"""
         SELECT
             IFNULL((SELECT SUM(PRICE) FROM EATOUT WHERE DATE >= '{start_date}' AND DATE < '{end_date}'), 0) AS eatout_sum,
-            IFNULL((SELECT SUM(PRICE) FROM SUBSCRIPTIONS), 0) AS subs_sum
+            IFNULL((SELECT SUM(PRICE) FROM SUBSCRIPTIONS), 0) AS subs_sum,
+            IFNULL((SELECT SUM(PRICE) FROM TRAVEL WHERE DEPATURE_DATE >= '{start_date}' AND DEPATURE_DATE < '{end_date}'), 0) AS travel_sum
         """
         row = db_utilities.db_select(cur,query)
         print(row)
-        total = row[0][0] + row[0][1]
+        total = row[0][0] + row[0][1] + row[0][2]
         return {"total": total}
 
 
@@ -106,7 +107,26 @@ def subscriptions_expenses():
         rows = db_utilities.db_select(cur,query)
         data = [{"service": r[0], "price": r[1]} for r in rows]
         return {"data": data}
-    
+
+@app.get("/travel_expenses")
+def get_travel_expenses(month: str):
+    from datetime import datetime, timedelta
+
+    dt = datetime.strptime(month, "%Y-%m")
+    start_date = month + "-01"
+    next_month = (dt.replace(day=28) + timedelta(days=4)).replace(day=1)
+    end_date = next_month.strftime("%Y-%m-%d")
+
+    with db_utilities.cursor_handler(db_utilities.con) as cur:
+        query = f"""
+            SELECT MODE_NAME AS mode, SUM(PRICE) AS price
+            FROM TRAVEL
+            WHERE DEPATURE_DATE >= '{start_date}' AND DEPATURE_DATE < '{end_date}'
+            GROUP BY MODE_NAME
+        """
+        rows = db_utilities.db_select(cur, query)
+        data = [{"mode": r[0], "price": r[1]} for r in rows]
+    return {"data": data}
     
 @app.get("/subscriptions")
 def get_subscriptions():
@@ -137,6 +157,16 @@ def delete_subscription(sub_id: int):
     with db_utilities.cursor_handler(db_utilities.con) as cur:
         db_utilities.db_select(cur, f"DELETE FROM SUBSCRIPTIONS WHERE ID = {sub_id}")
     return {"message": "Subscription deleted successfully"}
+
+@app.post("/add_travel")
+def add_travel(record: dict):
+    with db_utilities.cursor_handler(db_utilities.con) as cur:
+        query = f"""
+            INSERT INTO TRAVEL (MODE_NAME, FROM_CITY, DESTINATION, DEPATURE_DATE, ARRIVAL_DATE, PRICE) VALUES ('{record['mode_name']}', '{record['from']}', '{record['destination']}', '{record['departure_date']}', '{record['arrival_date']}',{record['price']})
+        """
+        db_utilities.insert_db(cur,query)
+    return {"status": "success"}
+
 
 if __name__ == "__main__":
     import uvicorn

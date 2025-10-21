@@ -20,7 +20,7 @@ export default function HomePage() {
         <button className="button" onClick={() => navigate("/subscriptions")}>
           Subscriptions
         </button>
-        <button className="button" onClick={() => alert("Coming soon!")}>
+        <button className="button" onClick={() => navigate("/travel")}>
           Travel
         </button>
         <button className="button" onClick={() => navigate("/viewsummary")}>
