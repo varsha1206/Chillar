@@ -47,10 +47,10 @@ export default function ViewSummary() {
     return now.toISOString().slice(0, 7);
   });
   const [totalExpense, setTotalExpense] = useState(0);
-  const [groceryData, setGroceryData] = useState([]);
   const [eatOutData, setEatOutData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [subscriptionsData, setSubscriptionsData] = useState([]);
 
   useEffect(() => {
     if (!month) return;
@@ -59,20 +59,20 @@ export default function ViewSummary() {
       setLoading(true);
       setError(null);
       try {
-        const [totalRes, groceryRes, eatoutRes] = await Promise.all([
+        const [totalRes, eatoutRes, subsRes] = await Promise.all([
           fetch(`http://localhost:8000/total_expense?month=${month}`),
-          fetch(`http://localhost:8000/grocery_expenses?month=${month}`),
           fetch(`http://localhost:8000/eatout_expenses?month=${month}`),
+          fetch(`http://localhost:8000/subscriptions_expenses`)
         ]);
-        if (!totalRes.ok || !groceryRes.ok || !eatoutRes.ok)
+        if (!totalRes.ok || !subsRes.ok || !eatoutRes.ok)
           throw new Error("Failed to load data");
 
         const totalJson = await totalRes.json();
-        const groceryJson = await groceryRes.json();
         const eatoutJson = await eatoutRes.json();
+        const subsJson = await subsRes.json();
 
+        setSubscriptionsData(subsJson.data || []);
         setTotalExpense(totalJson.total || 0);
-        setGroceryData(groceryJson.data || []);
         setEatOutData(eatoutJson.data || []);
       } catch (err) {
         setError(err.message);
@@ -135,6 +135,39 @@ export default function ViewSummary() {
           </>
         )}
       </div>
+      <div className="container subscriptions-container">
+        <h2>Subscriptions</h2>
+        {loading && <p>Loading...</p>}
+        {error && <p className="error">{error}</p>}
+        {!loading && !error && subscriptionsData.length === 0 && (
+          <p>No subscriptions recorded.</p>
+        )}
+        {subscriptionsData.length > 0 && (
+          <>
+            <table>
+              <thead>
+                <tr>
+                  <th>Service</th>
+                  <th>Price (€)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {subscriptionsData.map(({ service, price }) => (
+                  <tr key={service}>
+                    <td>{service}</td>
+                    <td>{price.toFixed(2)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            <div className="piechart-wrapper">
+              <PieChartComponent data={subscriptionsData} labelKey="service" />
+            </div>
+          </>
+        )}
+      </div>
+
     </div>
   );
 }

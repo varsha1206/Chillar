@@ -62,8 +62,9 @@ def total_expense(month: str = Query(..., description="Month in YYYY-MM format")
     with db_utilities.cursor_handler(db_utilities.con) as cur:
         # Sum prices from both tables for the month
         query = f"""
-            SELECT
-            (SELECT IFNULL(SUM(PRICE), 0) FROM EATOUT WHERE DATE >= '{start_date}' AND DATE < '{end_date}') AS eatout_sum
+        SELECT
+            IFNULL((SELECT SUM(PRICE) FROM EATOUT WHERE DATE >= '{start_date}' AND DATE < '{end_date}'), 0) AS eatout_sum,
+            IFNULL((SELECT SUM(PRICE) FROM SUBSCRIPTIONS), 0) AS subs_sum
         """
         row = db_utilities.db_select(cur,query)
         print(row)
@@ -93,6 +94,19 @@ def eatout_expenses(month: str = Query(..., description="Month in YYYY-MM format
         rows = db_utilities.db_select(cur,query)
         data = [{"restaurant": r[0], "price": r[1]} for r in rows]
         return {"data": data}
+
+@app.get("/subscriptions_expenses")
+def subscriptions_expenses():
+    with db_utilities.cursor_handler(db_utilities.con) as cur:
+        # Group by restaurant sum for eatout expenses
+        query = """
+            SELECT NAME as service, PRICE as price
+            FROM SUBSCRIPTIONS
+        """
+        rows = db_utilities.db_select(cur,query)
+        data = [{"service": r[0], "price": r[1]} for r in rows]
+        return {"data": data}
+    
     
 @app.get("/subscriptions")
 def get_subscriptions():

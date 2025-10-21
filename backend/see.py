@@ -6,5 +6,5 @@ from datetime import datetime
 #     db_utilities.db_select(cur,"DROP TABLE SUBSCRIPTIONS")
     
 # #SELECT
-with db_utilities.cursor_handler(db_utilities.con) as cur:
-    print(db_utilities.insert_db(cur,"INSERT INTO SUBSCRIPTIONS VALUES (5,'Aldi Sim',9)"))
+# with db_utilities.cursor_handler(db_utilities.con) as cur:
+#     print(db_utilities.insert_db(cur,"SELECT "))

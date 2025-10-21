@@ -30,7 +30,7 @@ def db_setup(cur):
     for eachTable, allColumns in tableList.items():
         try:
             result = cur.execute(f"SELECT * FROM {eachTable}")
-            print(f"table {eachTable} exists")
+            print(f"table {eachTable} exists with {len(result)} rows")
         except sqlite3.OperationalError as error:
             if "no such table" in str(error):
                 print(eachTable)
