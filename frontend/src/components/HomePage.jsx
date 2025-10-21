@@ -14,13 +14,10 @@ export default function HomePage() {
         <img src="/pfp.jpg" alt="Logo" className="logo-circle" />
       </div>
       <div className="menu-grid">
-        <button className="button" onClick={() => navigate("/grocery-upload")}>
-          Grocery
-        </button>
         <button className="button" onClick={() => navigate("/eatout")}>
           Eat Out
         </button>
-        <button className="button" onClick={() => alert("Coming soon!")}>
+        <button className="button" onClick={() => navigate("/subscriptions")}>
           Subscriptions
         </button>
         <button className="button" onClick={() => alert("Coming soon!")}>

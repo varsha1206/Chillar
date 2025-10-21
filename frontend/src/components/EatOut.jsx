@@ -31,6 +31,10 @@ const restaurantData = {
     { name: "Pizza Margherita", price: 9.95 },
     { name: "Juice/Soda", price: 3.7 }
   ],
+  "Unter Freunden": [
+    { name: "Pizza Margherita", price: 8.95 },
+    { name: "Juice/Soda", price: 3.7 }
+  ],
   "Burger Me": [
     { name: "Sandeep Discount", price: 3 },
     { name: "Sandeep Meal", price: 5 }

@@ -103,39 +103,6 @@ export default function ViewSummary() {
         </h1>
       </div>
 
-      <div className="container grocery-container">
-        <h2>Grocery Expenses</h2>
-        {loading && <p>Loading...</p>}
-        {error && <p className="error">{error}</p>}
-        {!loading && !error && groceryData.length === 0 && (
-          <p>No grocery expenses recorded for {month}.</p>
-        )}
-        {groceryData.length > 0 && (
-          <>
-            <table>
-              <thead>
-                <tr>
-                  <th>Category</th>
-                  <th>Amount (€)</th>
-                </tr>
-              </thead>
-              <tbody>
-                {groceryData.map(({ category, price }) => (
-                  <tr key={category}>
-                    <td>{category}</td>
-                    <td>{price.toFixed(2)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-
-            <div className="piechart-wrapper">
-              <PieChartComponent data={groceryData} labelKey="category" />
-            </div>
-          </>
-        )}
-      </div>
-
       <div className="container eatout-container">
         <h2>Eat Out Expenses</h2>
         {loading && <p>Loading...</p>}

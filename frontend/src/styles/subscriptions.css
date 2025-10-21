@@ -1,0 +1,121 @@
+.subscriptions-container {
+  background-color: #2C3930;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  font-family: "Gowun Batang", sans-serif;
+  color: #DCD7C9;
+}
+
+.subscriptions-container h1 {
+  text-align: center;
+  color: #DCD7C9;
+  margin-bottom: 2rem;
+}
+
+.subscription-card {
+  background-color: #a27b5c;
+  color: #fff;
+  padding: 1rem;
+  margin: 1rem auto;
+  border-radius: 0.8rem;
+  max-width: 30rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.subscription-card h2 {
+  margin-bottom: 0.5rem;
+  color: #DCD7C9;
+  text-align: left;
+}
+
+.subscription-details {
+  display: flex;
+  align-items: right;
+  gap: 0.9rem;
+}
+
+.price-box {
+  background: #dcd7c9;
+  color: #2c3930;
+  padding: 0.4rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+}
+
+.edit-btn,
+.delete-btn,
+.save-btn,
+.cancel-btn,
+.add-btn {
+  background: #3f4f44;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.edit-btn:hover {
+  background: #2c3930;
+}
+
+.delete-btn {
+  background: #7a2c2c;
+}
+
+.delete-btn:hover {
+  background: #a33a3a;
+}
+
+.save-btn {
+  background: #3b6545;
+}
+
+.save-btn:hover {
+  background: #31593a;
+}
+
+.cancel-btn {
+  background: #888;
+}
+
+.cancel-btn:hover {
+  background: #666;
+}
+
+.add-subscription {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 2rem;
+}
+
+.add-subscription input {
+  padding: 0.5rem;
+  border: 1px solid #a27b5c;
+  border-radius: 0.5rem;
+  width: 8rem;
+}
+
+.add-btn {
+  background-color: #a27b5c;
+  font-size: 1.5rem;
+  padding: 0.4rem 1rem;
+  border-radius: 50%;
+  color: white;
+}
+
+.add-btn:hover {
+  background-color: #8e6b52;
+}
+
+.empty-text {
+  text-align: center;
+  font-size: 1rem;
+  color: #3f4f44;
+}

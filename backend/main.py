@@ -63,7 +63,6 @@ def total_expense(month: str = Query(..., description="Month in YYYY-MM format")
         # Sum prices from both tables for the month
         query = f"""
             SELECT
-            (SELECT IFNULL(SUM(PRICE), 0) FROM EXPENSES WHERE DATE >= '{start_date}' AND DATE < '{end_date}') AS grocery_sum,
             (SELECT IFNULL(SUM(PRICE), 0) FROM EATOUT WHERE DATE >= '{start_date}' AND DATE < '{end_date}') AS eatout_sum
         """
         row = db_utilities.db_select(cur,query)
@@ -71,29 +70,6 @@ def total_expense(month: str = Query(..., description="Month in YYYY-MM format")
         total = row[0][0] + row[0][1]
         return {"total": total}
 
-@app.get("/grocery_expenses")
-def grocery_expenses(month: str = Query(..., description="Month in YYYY-MM format")):
-    dt = parse_month_str(month)
-    if dt is None:
-        raise HTTPException(status_code=400, detail="Invalid month format")
-
-    start_date = month + "-01"
-    next_month = (dt.replace(day=28) + timedelta(days=4)).replace(day=1)
-    end_date = next_month.strftime("%Y-%m-%d")
-
-    with db_utilities.cursor_handler(db_utilities.con) as cur:
-        # Group by category sum for grocery expenses
-        query = f"""
-            SELECT CATEGORY as category, SUM(PRICE) as price
-            FROM EXPENSES
-            WHERE DATE >= '{start_date}' AND DATE < '{end_date}'
-            GROUP BY CATEGORY
-            ORDER BY price DESC
-        """
-        rows = db_utilities.db_select(cur,query)
-        print(rows)
-        data = [{"category": r[0], "price": r[1]} for r in rows]
-        return {"data": data}
 
 @app.get("/eatout_expenses")
 def eatout_expenses(month: str = Query(..., description="Month in YYYY-MM format")):
@@ -117,6 +93,36 @@ def eatout_expenses(month: str = Query(..., description="Month in YYYY-MM format
         rows = db_utilities.db_select(cur,query)
         data = [{"restaurant": r[0], "price": r[1]} for r in rows]
         return {"data": data}
+    
+@app.get("/subscriptions")
+def get_subscriptions():
+    with db_utilities.cursor_handler(db_utilities.con) as cur:
+        rows = db_utilities.db_select(cur,"SELECT * FROM SUBSCRIPTIONS")
+        return [{"id": r[0], "name": r[1], "price": r[2]} for r in rows]
+
+
+@app.post("/subscriptions/add")
+async def add_subscription(request: Request):
+    data = await request.json()
+    with db_utilities.cursor_handler(db_utilities.con) as cur:
+        db_utilities.insert_db(cur, f"INSERT INTO SUBSCRIPTIONS ('NAME',PRICE) VALUES ('{data['name']}',{data['price']})")
+    return {"message": "Subscription added successfully"}
+
+
+@app.put("/subscriptions/update/{sub_id}")
+async def update_subscription(sub_id: int, request: Request):
+    data = await request.json()
+    with db_utilities.cursor_handler(db_utilities.con) as cur:
+        db_utilities.db_select(cur, f"UPDATE SUBSCRIPTIONS SET PRICE = {data['price']} WHERE ID = {sub_id}")
+
+    return {"message": "Subscription updated successfully"}
+
+
+@app.delete("/subscriptions/delete/{sub_id}")
+def delete_subscription(sub_id: int):
+    with db_utilities.cursor_handler(db_utilities.con) as cur:
+        db_utilities.db_select(cur, f"DELETE FROM SUBSCRIPTIONS WHERE ID = {sub_id}")
+    return {"message": "Subscription deleted successfully"}
 
 if __name__ == "__main__":
     import uvicorn

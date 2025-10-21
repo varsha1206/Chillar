@@ -1,8 +1,8 @@
 """The Schema of tables in the database"""
 
 tableList = {
-    "EXPENSES": ["CATEGORY","PRICE","DATE"],
-    "EATOUT": ["RESTAURANT","ORDER_NAME","PRICE","DATE"]
+    "EATOUT": ["RESTAURANT","ORDER_NAME","PRICE","DATE"],
+    "SUBSCRIPTIONS": ["ID INTEGER PRIMARY KEY AUTOINCREMENT", "NAME", "PRICE"]
     }
 
 import sqlite3

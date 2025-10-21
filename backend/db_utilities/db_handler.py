@@ -1,7 +1,8 @@
 """Script to handle db operations"""
 
-from contextlib import contextmanager
 import sqlite3
+from contextlib import contextmanager
+
 
 @contextmanager
 def cursor_handler(con):
@@ -10,8 +11,10 @@ def cursor_handler(con):
     cur.close()
     con.commit()
 
+
 def insert_db(cur, query):
     cur.execute(query)
+
 
 def db_select(cur, query):
     try:
@@ -19,8 +22,9 @@ def db_select(cur, query):
         rows = cur.fetchall()
     except Exception as error:
         print(str(error))
-    
+
     return rows
+
 
 def db_setup(cur):
     for eachTable, allColumns in tableList.items():
@@ -35,7 +39,9 @@ def db_setup(cur):
                 print()
                 print("table created")
 
+
 if __name__ == "__main__":
     from table_metadata import con, tableList
+
     with cursor_handler(con) as cur:
         db_setup(cur)
